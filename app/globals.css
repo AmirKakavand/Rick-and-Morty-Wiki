@@ -2,32 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+@font-face {
+  font-family: 'Wellfleet';
+  src: url('/fonts/Wellfleet-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: #231F20;
+  text-shadow: 
+    -1px -1px 0 #000,
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.character-card {
+  box-shadow: 10px 10px #F9F4DA;
+  border: #F9F4DA 2px solid;
+  text-shadow: 
+    -1px -1px 0 #000,
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000;
+}
+
+
+
+nav>button {
+  box-shadow: 4px 4px #231F20;
+  border: #231F20 2px solid;
+}
+nav>div>span>input {
+  text-shadow: 
+    -1px -1px 0 #555,
+     1px -1px 0 #555,
+    -1px  1px 0 #555,
+     1px  1px 0 #555;
+}
+
+h1 {
+  color: #00DCF7;
+  text-shadow: 
+    -2px -2px 0 #000,
+     2px -2px 0 #000,
+    -2px  2px 0 #000,
+     2px  2px 0 #000;
 }

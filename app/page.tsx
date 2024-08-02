@@ -1,113 +1,98 @@
-import Image from "next/image";
+"use client";
+import { useState } from "react";
+import { CharactersPage } from "./components/CharactersPage";
+import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { handleSearch } from "./utils/handleSearch";
 
 export default function Home() {
+  const [pageNo, setPageNo] = useState<number>(1);
+  const [name, setName] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [mouseHover, setMouseHover] = useState<boolean>(false);
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main className={mainClass}>
+      <header className="flex flex-col md:flex-row justify-around">
+        <h1 className={h1Class}>Rick and Morty Wiki</h1>
+        <div className="flex items-center justify-around input-group relative">
+          <input
+            type="text"
+            className={searchBarClass}
+            placeholder="Search by name"
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                handleSearch({ name, setName, setSearchQuery, setPageNo });
+              }
+            }}
+          />
+          <div className= "hidden md:inline text-slate-600 inset-y-auto right-0.5 md:right-4 absolute">
+            {name === "" ? (
+              <MagnifyingGlassIcon className="w-7 h-7" />
+            ) : (
+              <XMarkIcon
+                className={mouseHover ? "w-7 h-7 cursor-pointer" : "w-7 h-7"}
+                onMouseEnter={() => setMouseHover(true)}
+                onMouseLeave={() => setMouseHover(false)}
+                onClick={() => {
+                  setName("");
+                  setSearchQuery("");
+                }}
+              />
+            )}
+          </div>
         </div>
-      </div>
+      </header>
 
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+      {searchQuery === "" && (
+        <CharactersPage pageNo={pageNo} setPageNo={setPageNo} />
+      )}
+      {searchQuery !== "" && (
+        <CharactersPage
+          pageNo={pageNo}
+          setPageNo={setPageNo}
+          searchQuery={searchQuery}
         />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      )}
     </main>
   );
 }
+
+const mainClass = [
+  "min-h-screen",
+  // "max-w-11/12",
+  "p-4",
+  "text-mainTextColor",
+  "selection:bg-slate-800",
+  "selection:text-orange-500",
+  "my-auto",
+].join(" ");
+
+const h1Class = [
+  "font-bold",
+  "text-center",
+  "my-auto",
+  "text-2xl",
+  "md:text-5xl",
+].join(" ");
+
+const searchBarClass = [
+  "text-neutral-800",
+  "rounded-xl",
+  "my-6",
+  "md:my-auto",
+  "px-0",
+  "md:px-4",
+  "h-10",
+  "sm:h-12",
+  "text-xl",
+  "md:text-3xl",
+  "text-center",
+  "bg-[#F9F4DA]",
+  "text-[#231F20]",
+  "shadow-[10px_10px_#231F20,11px_11px_#F9F4DA]",
+  "border-2",
+  "border-[#F9F4DA]",
+  "text-shadow-[-1px_-1px_0_#666,1px_-1px_0_#666,-1px_1px_0_#666,1px_1px_0_#666",
+  "focus:ring-indigo-500",
+].join(" ");

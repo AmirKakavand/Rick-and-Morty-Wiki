@@ -13,8 +13,14 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      colors: {
+        mainTextColor: "#F9F4DA",
+        // headingColor: "#1E1E24"
+        headingColor: "#00DCF7",
+        cardBgColor: "#231F20",
+      },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")],
 };
 export default config;
