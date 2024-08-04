@@ -7,7 +7,12 @@ const nextConfig = {
                 hostname: "rickandmortyapi.com"
             }
         ]
-    }
+    },
+    experimental: {
+        fontLoaders: [
+          { loader: '@next/font/google', options: { subsets: ['latin'] } },
+        ],
+      },
 };
 
 // https://rickandmortyapi.com/api/character/avatar/1.jpeg
