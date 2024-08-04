@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CharactersPage } from "./components/CharactersPage";
 import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { handleSearch } from "./utils/handleSearch";
@@ -9,6 +9,8 @@ export default function Home() {
   const [name, setName] = useState<string>("");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [mouseHover, setMouseHover] = useState<boolean>(false);
+
+  useEffect (() => handleSearch({ name, setSearchQuery, setPageNo }), [name])
   return (
     <main className={mainClass}>
       <header className="flex flex-col md:flex-row justify-around">
@@ -19,11 +21,10 @@ export default function Home() {
             className={searchBarClass}
             placeholder="Search by name"
             value={name}
-            onChange={(event) => setName(event.target.value)}
-            onKeyDown={(event) => {
-              if (event.key === "Enter") {
-                handleSearch({ name, setName, setSearchQuery, setPageNo });
-              }
+            onChange={(event) => {
+              setName((prevName) => {
+                return event.target.value;
+              })
             }}
           />
           <div className= "hidden md:inline text-slate-600 inset-y-auto right-0.5 md:right-4 absolute">

@@ -11,14 +11,7 @@ const PageNavigation = (props: IProps) => {
   const [tempPageNo, setTempPageNo] = useState<number | string>(1);
   const [originalPage, setOriginalPage] = useState<number | string>(tempPageNo);
   return (
-    <nav
-      className="flex flex-row justify-between py-2 px-2 md:px-8 mt-10 mb-5 max-w-xl mx-auto rounded-xl bg-[#F9F4DA] text-[#231F20] shadow-[10px_10px_#231F20,11px_11px_#F9F4DA] border-2 border-[#F9F4DA] text-shadow-[
-  -1px_-1px_0_#666,
-  1px_-1px_0_#666,
-  -1px_1px_0_#666,
-  1px_1px_0_#666
-]"
-    >
+    <nav className="flex flex-row justify-between py-2 px-2 md:px-8 mt-10 mb-5 max-w-xl mx-auto rounded-xl bg-[#F9F4DA] text-[#231F20] shadow-[10px_10px_#231F20,11px_11px_#F9F4DA] border-2 border-[#F9F4DA]">
       <button
         className="text-sm md:text-2xl px-2 md:px-4 py-1 rounded-md text-cardBgColor font-semibold"
         onClick={() => {
@@ -31,7 +24,7 @@ const PageNavigation = (props: IProps) => {
         Prev
       </button>
       <div className="text-md md:text-2xl">
-        <span>
+        <span className="font-extrabold">
           Page{" "}
           <input
             type="text"

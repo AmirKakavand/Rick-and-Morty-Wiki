@@ -12,11 +12,11 @@
 body {
   color: rgb(var(--foreground-rgb));
   background-color: #231F20;
-  text-shadow: 
+  /* text-shadow: 
     -1px -1px 0 #000,
      1px -1px 0 #000,
     -1px  1px 0 #000,
-     1px  1px 0 #000;
+     1px  1px 0 #000; */
 }
 
 .character-card {
