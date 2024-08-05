@@ -22,8 +22,8 @@ export const CharacterCard = (props: IProps) => {
     //   {error && <p>Something went wrong</p>}
     //   {character && <p>Character Name: {character.name}</p>}
     // </>
-    <article className="character-card h-full pb-4 mx-2 sm:m-6 shadow-neutral-300/25 rounded-xl flex flex-col justify-around items-center bg-cardBgColor">
-      <header className="text-center my-2">
+    <article className="character-card h-full pb-4 mx-2 sm:m-4 shadow-neutral-300/25 rounded-xl flex flex-col justify-around items-center">
+      <header className="text-center my-2 sm:my-0">
         <h2 className="text-3xl">{character?.name}</h2>
       </header>
 

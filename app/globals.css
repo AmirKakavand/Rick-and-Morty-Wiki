@@ -23,8 +23,9 @@ body {
 }
 
 .character-card {
-  box-shadow: 10px 10px #F9F4DA;
-  border: #F9F4DA 2px solid;
+  box-shadow: 10px 10px #F9F4DA !important;
+  background-color: #231F20 !important;
+  border: #F9F4DA 2px solid !important;
   text-shadow: 
     -1px -1px 0 #000,
      1px -1px 0 #000,
