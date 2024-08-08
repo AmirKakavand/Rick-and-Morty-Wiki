@@ -71,7 +71,7 @@ const PageNavigation = (props: IProps) => {
               }
             }}
             onBlur={() => setTempPageNo(originalPage)}
-            className="w-12 text-center text-2xl md:text-3xl bg-mainTextColor font-extrabold border-none rounded-md p-1"
+            className="w-12 text-center border-2 border-solid border-neutral-600 text-2xl md:text-3xl bg-mainTextColor font-extrabold rounded-md p-1"
           />{" "}
           of {Number.isNaN(props.lastPageNo) ? ". . ." : props.lastPageNo}
         </span>
