@@ -13,8 +13,8 @@ const nextConfig = {
           { loader: '@next/font/google', options: { subsets: ['latin'] } },
         ],
       },
-      assetPrefix: '/Rick-and-Morty-Wiki/',
-      basePath: '/Rick-and-Morty-Wiki/',
+    //   assetPrefix: '/Rick-and-Morty-Wiki',
+      basePath: '/Rick-and-Morty-Wiki',
 };
 
 // https://rickandmortyapi.com/api/character/avatar/1.jpeg
