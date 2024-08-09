@@ -6,7 +6,7 @@ import { FaXTwitter, FaTelegram } from "react-icons/fa6";
 const Footer = () => {
   return (
     <footer className="flex flex-col mt-8 space-y-2">
-      <hr className=" border-t-2 border-[#00DCF7]" />
+      <hr className=" border-t-2 border-mainTextColor" />
       <div className="flex flex-col sm:flex-row sm:justify-between sm:px-6">
         <div className="flex flex-row items-center justify-center space-x-2">
           <Image
