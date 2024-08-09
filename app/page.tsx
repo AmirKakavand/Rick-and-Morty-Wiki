@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { CharactersPage } from "./components/CharactersPage";
 import { handleSearch } from "./utils/handleSearch";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 export default function Home() {
   const [pageNo, setPageNo] = useState<number>(1);
@@ -23,6 +24,8 @@ export default function Home() {
           searchQuery={searchQuery}
         />
       )}
+
+      {searchQuery === "" && pageNo === 1 && <Footer />}
     </main>
   );
 }

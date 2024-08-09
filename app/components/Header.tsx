@@ -1,5 +1,6 @@
 import { useState, Dispatch, SetStateAction } from "react";
-import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { IoCloseOutline } from "react-icons/io5";
+import { IoIosSearch } from "react-icons/io";
 
 interface IHeaderProps {
   name: string;
@@ -33,9 +34,9 @@ const Header = ({ name, setName, setSearchQuery }: IHeaderProps) => {
         />
         <div className="hidden md:inline text-slate-600 inset-y-auto right-0.5 md:right-4 absolute">
           {name === "" ? (
-            <MagnifyingGlassIcon className="w-7 h-7" />
+            <IoIosSearch className="w-7 h-7" />
           ) : (
-            <XMarkIcon
+            <IoCloseOutline
               className={mouseHover ? "w-7 h-7 cursor-pointer" : "w-7 h-7"}
               onMouseEnter={() => setMouseHover(true)}
               onMouseLeave={() => setMouseHover(false)}
