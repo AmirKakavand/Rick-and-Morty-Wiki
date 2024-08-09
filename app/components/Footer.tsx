@@ -10,7 +10,7 @@ const Footer = () => {
       <div className="flex flex-col sm:flex-row sm:justify-between sm:px-6">
         <div className="flex flex-row items-center justify-center space-x-2">
           <Image
-            src={"/images/AmirKakavand.jpg"}
+            src={"/Rick-and-Morty-Wiki/images/AmirKakavand.jpg"}
             width={"80"}
             height={"80"}
             alt="Photo of Amir Kakavand"
