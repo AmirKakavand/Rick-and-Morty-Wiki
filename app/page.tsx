@@ -13,7 +13,12 @@ export default function Home() {
   useEffect(() => handleSearch({ name, setSearchQuery, setPageNo }), [name]);
   return (
     <main className={mainClass}>
-      <Header name={name} setName={setName} setSearchQuery={setSearchQuery} />
+      <Header
+        name={name}
+        setPageNo={setPageNo}
+        setName={setName}
+        setSearchQuery={setSearchQuery}
+      />
       {searchQuery === "" && (
         <CharactersPage pageNo={pageNo} setPageNo={setPageNo} />
       )}

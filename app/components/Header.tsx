@@ -4,17 +4,19 @@ import { IoIosSearch } from "react-icons/io";
 
 interface IHeaderProps {
   name: string;
+  setPageNo: Dispatch<SetStateAction<number>>; 
   setName: Dispatch<SetStateAction<string>>;
   setSearchQuery: Dispatch<SetStateAction<string>>;
 }
 
-const Header = ({ name, setName, setSearchQuery }: IHeaderProps) => {
+const Header = ({ name, setPageNo, setName, setSearchQuery }: IHeaderProps) => {
   const [mouseHover, setMouseHover] = useState<boolean>(false);
   return (
     <header className="flex flex-col md:flex-row justify-around">
       <button onClick={() => {
         setSearchQuery("")
         setName("")
+        setPageNo(1)
       }}>
         <h1 className={h1Class}>
           Rick and Morty Wiki
