@@ -1,1 +1,1 @@
-![A photo of the website's homepage](/images/demo-image)
+![A photo of the website's homepage](/images/demo-image.png)
