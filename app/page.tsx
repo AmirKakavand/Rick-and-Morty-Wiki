@@ -9,6 +9,7 @@ export default function Home() {
   const [pageNo, setPageNo] = useState<number>(1);
   const [name, setName] = useState<string>("");
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [tempPageNo, setTempPageNo] = useState<number | string>(1);
 
   useEffect(() => handleSearch({ name, setSearchQuery, setPageNo }), [name]);
   return (
@@ -16,17 +17,25 @@ export default function Home() {
       <Header
         name={name}
         setPageNo={setPageNo}
+        setTempPageNo={setTempPageNo}
         setName={setName}
         setSearchQuery={setSearchQuery}
       />
       {searchQuery === "" && (
-        <CharactersPage pageNo={pageNo} setPageNo={setPageNo} />
+        <CharactersPage
+          pageNo={pageNo}
+          setPageNo={setPageNo}
+          tempPageNo={tempPageNo}
+          setTempPageNo={setTempPageNo}
+        />
       )}
       {searchQuery !== "" && (
         <CharactersPage
           pageNo={pageNo}
           setPageNo={setPageNo}
           searchQuery={searchQuery}
+          tempPageNo={tempPageNo}
+          setTempPageNo={setTempPageNo}
         />
       )}
 

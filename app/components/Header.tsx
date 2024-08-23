@@ -5,11 +5,12 @@ import { IoIosSearch } from "react-icons/io";
 interface IHeaderProps {
   name: string;
   setPageNo: Dispatch<SetStateAction<number>>; 
+  setTempPageNo: Dispatch<SetStateAction<number | string>>; 
   setName: Dispatch<SetStateAction<string>>;
   setSearchQuery: Dispatch<SetStateAction<string>>;
 }
 
-const Header = ({ name, setPageNo, setName, setSearchQuery }: IHeaderProps) => {
+const Header = ({ name, setPageNo, setName, setSearchQuery, setTempPageNo }: IHeaderProps) => {
   const [mouseHover, setMouseHover] = useState<boolean>(false);
   return (
     <header className="flex flex-col md:flex-row justify-around">
@@ -17,6 +18,7 @@ const Header = ({ name, setPageNo, setName, setSearchQuery }: IHeaderProps) => {
         setSearchQuery("")
         setName("")
         setPageNo(1)
+        setTempPageNo(1)
       }}>
         <h1 className={h1Class}>
           Rick and Morty Wiki

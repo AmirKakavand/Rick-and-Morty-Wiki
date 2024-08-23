@@ -1,12 +1,14 @@
 "use client";
-import { useState } from "react";
+import { useState, Dispatch, SetStateAction } from "react";
 import { CharacterCard } from "../components/CharacterCard";
 import { useMultipleCharacters } from "../utils/useMultipleCharacters";
 import PageNavigation from "./PageNavigation";
 
 interface IProps {
   pageNo: number;
-  setPageNo: React.Dispatch<React.SetStateAction<number>>;
+  setPageNo: Dispatch<SetStateAction<number>>;
+  tempPageNo: number | string;
+  setTempPageNo: Dispatch<SetStateAction<number | string>>;
   searchQuery?: string
 }
 
@@ -41,6 +43,8 @@ export const CharactersPage = (props: IProps) => {
         pageNo={props.pageNo}
         setPageNo={props.setPageNo}
         lastPageNo={lastPageNo}
+        tempPageNo={props.tempPageNo}
+        setTempPageNo={props.setTempPageNo}
       />
     </>
   );
