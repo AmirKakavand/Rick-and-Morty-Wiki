@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useEffect, MouseEvent as ReactMouseEvent } from "react";
+import { useState, useRef, useEffect, MouseEvent as ReactMouseEvent } from "react";
 import Image from "next/image";
 import { ICharacter } from "../types/ICharacter";
 
@@ -13,17 +13,17 @@ const statusStyles: Record<
   { badge: string; dot: string; label: string }
 > = {
   Alive: {
-    badge: "bg-[#00E676] text-black",
+    badge: "bg-[linear-gradient(#00E676,#00E676)] bg-[#00E676] !text-black",
     dot: "bg-black",
     label: "ALIVE",
   },
   Dead: {
-    badge: "bg-[#FF2A55] text-white",
+    badge: "bg-[linear-gradient(#FF2A55,#FF2A55)] bg-[#FF2A55] !text-white",
     dot: "bg-white",
     label: "DEAD",
   },
   unknown: {
-    badge: "bg-yellow-500 text-black",
+    badge: "bg-[linear-gradient(#EAB308,#EAB308)] bg-yellow-500 !text-black",
     dot: "bg-black",
     label: "UNKNOWN",
   },
@@ -32,6 +32,11 @@ const statusStyles: Record<
 export const CharacterCard = ({ character, onSelect }: IProps) => {
   const cardRef = useRef<HTMLElement>(null);
   const glareRef = useRef<HTMLDivElement>(null);
+  const [imgSrc, setImgSrc] = useState<string>(character.image);
+
+  useEffect(() => {
+    setImgSrc(character.image);
+  }, [character.image]);
 
   // Tethered Zero-G state: gentle harmonic float + spring-returned nudge offset
   const phys = useRef({
@@ -174,11 +179,11 @@ export const CharacterCard = ({ character, onSelect }: IProps) => {
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      onClick={() => onSelect(character)}
+      onClick={() => onSelect({ ...character, image: imgSrc })}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
-          onSelect(character);
+          onSelect({ ...character, image: imgSrc });
         }
       }}
       role="button"
@@ -187,29 +192,38 @@ export const CharacterCard = ({ character, onSelect }: IProps) => {
         transition: "box-shadow 0.2s ease",
         willChange: "transform",
       }}
-      className="group relative select-none cursor-pointer bg-[#1E293B] border-4 border-[#F9F4DA] shadow-[7px_7px_0px_#F9F4DA] hover:shadow-[10px_10px_0px_#FF6B00] hover:z-20 active:scale-95 focus:outline-none flex flex-col"
+      className="slate-card-surface group relative select-none cursor-pointer border-4 border-[#F9F4DA] shadow-[7px_7px_0px_#F9F4DA] hover:shadow-[10px_10px_0px_#FF6B00] hover:z-20 active:scale-95 focus:outline-none flex flex-col"
     >
       {/* Lighter Slate Top Window Bar (#334155) */}
-      <div className="bg-[#334155] text-[#F9F4DA] px-3 py-2 flex items-center justify-between border-b-4 border-[#F9F4DA] text-xs">
-        <span className="truncate uppercase tracking-wider text-[#F9F4DA]">
+      <div className="slate-bar-surface !text-[#F9F4DA] px-3 py-2 flex items-center justify-between border-b-4 border-[#F9F4DA] text-xs">
+        <span className="truncate uppercase tracking-wider !text-[#F9F4DA]">
           FILE // {character.name.slice(0, 14)}
         </span>
         <div className="flex items-center gap-1.5 shrink-0">
-          <span className="w-3 h-3 rounded-full bg-[#FF3B5C] border border-black" />
-          <span className="w-3 h-3 rounded-full bg-yellow-500 border border-black" />
-          <span className="w-3 h-3 rounded-full bg-[#00E676] border border-black" />
+          <span className="w-3 h-3 rounded-full bg-[linear-gradient(#FF3B5C,#FF3B5C)] bg-[#FF3B5C] border border-black" />
+          <span className="w-3 h-3 rounded-full bg-[linear-gradient(#EAB308,#EAB308)] bg-yellow-500 border border-black" />
+          <span className="w-3 h-3 rounded-full bg-[linear-gradient(#00E676,#00E676)] bg-[#00E676] border border-black" />
         </div>
       </div>
 
       {/* Inner Frame */}
       <div className="p-3 flex-1 flex flex-col justify-between gap-3">
-        <div className="relative aspect-square w-full bg-[#F9F4DA] border-4 border-black overflow-hidden">
+        <div className="cream-surface relative aspect-square w-full border-4 border-black overflow-hidden">
           <Image
-            src={character.image}
+            src={imgSrc}
             fill
+            unoptimized={imgSrc.startsWith("/")}
             sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 25vw"
             alt={character.name}
             draggable={false}
+            onError={() => {
+              // Automatic fallback between /Rick-and-Morty-Wiki/images/... and /images/...
+              if (imgSrc.startsWith("/images/")) {
+                setImgSrc(`/Rick-and-Morty-Wiki${imgSrc}`);
+              } else if (imgSrc.startsWith("/Rick-and-Morty-Wiki/images/")) {
+                setImgSrc(imgSrc.replace("/Rick-and-Morty-Wiki", ""));
+              }
+            }}
             className="object-cover transition-transform duration-300 group-hover:scale-105 pointer-events-none"
           />
 
@@ -233,11 +247,11 @@ export const CharacterCard = ({ character, onSelect }: IProps) => {
         </div>
 
         {/* Name & Action Bar */}
-        <div className="bg-[#F9F4DA] text-black border-4 border-black p-2.5 shadow-[4px_4px_0px_#000000] flex items-center justify-between gap-2">
-          <h2 className="font-normal text-base sm:text-lg uppercase tracking-wide truncate">
+        <div className="cream-surface border-4 border-black p-2.5 shadow-[4px_4px_0px_#000000] flex items-center justify-between gap-2">
+          <h2 className="font-normal text-base sm:text-lg uppercase tracking-wide truncate !text-black">
             {character.name}
           </h2>
-          <span className="text-xs px-2 py-0.5 bg-black text-white group-hover:bg-[#FF6B00] transition-colors shrink-0">
+          <span className="text-xs px-2 py-0.5 bg-[linear-gradient(#000000,#000000)] bg-black !text-white group-hover:bg-[linear-gradient(#FF6B00,#FF6B00)] group-hover:bg-[#FF6B00] transition-colors shrink-0">
             OPEN &gt;
           </span>
         </div>

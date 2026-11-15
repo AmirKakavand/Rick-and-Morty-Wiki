@@ -40,10 +40,10 @@ const PageNavigation = ({
 
   return (
     <div className="w-full max-w-lg mx-auto px-5 sm:px-4 mt-8 mb-6">
-      <nav className="w-full flex items-center justify-between gap-2 py-3 px-3 sm:px-6 bg-[#1E293B] text-[#F9F4DA] border-4 border-[#F9F4DA] shadow-[6px_6px_0px_#F9F4DA]">
+      <nav className="slate-card-surface w-full flex items-center justify-between gap-2 py-3 px-3 sm:px-6 !text-[#F9F4DA] border-4 border-[#F9F4DA] shadow-[6px_6px_0px_#F9F4DA]">
         <button
           disabled={pageNo <= 1}
-          className="text-xs sm:text-base px-2.5 sm:px-4 py-2 bg-[#F9F4DA] text-black border-2 sm:border-4 border-black shadow-[3px_3px_0px_#000000] hover:bg-white active:translate-x-0.5 active:translate-y-0.5 active:shadow-none disabled:opacity-40 disabled:pointer-events-none uppercase transition-all shrink-0 focus:outline-none"
+          className="cream-surface hover:!bg-[linear-gradient(#FFFFFF,#FFFFFF)] text-xs sm:text-base px-2.5 sm:px-4 py-2 border-2 sm:border-4 border-black shadow-[3px_3px_0px_#000000] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none disabled:opacity-40 disabled:pointer-events-none uppercase transition-all shrink-0 focus:outline-none"
           onClick={() => {
             const prev = pageNo - 1;
             setPageNo(prev);
@@ -54,7 +54,7 @@ const PageNavigation = ({
           &lt; PREV
         </button>
 
-        <div className="flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-base uppercase whitespace-nowrap">
+        <div className="flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-base uppercase whitespace-nowrap !text-[#F9F4DA]">
           <span>PAGE</span>
           <input
             type="text"
@@ -72,14 +72,14 @@ const PageNavigation = ({
               }
             }}
             onBlur={commitPageChange}
-            className="w-10 sm:w-12 text-center border-2 sm:border-4 border-black bg-[#F9F4DA] text-black text-sm sm:text-lg py-0.5 sm:py-1 focus:bg-white focus:border-black focus:ring-0 focus:outline-none"
+            className="cream-surface focus:!bg-[linear-gradient(#FFFFFF,#FFFFFF)] w-10 sm:w-12 text-center border-2 sm:border-4 border-black text-sm sm:text-lg py-0.5 sm:py-1 focus:border-black focus:ring-0 focus:outline-none"
           />
           <span>OF {lastPageNo || 1}</span>
         </div>
 
         <button
           disabled={pageNo >= lastPageNo}
-          className="text-xs sm:text-base px-2.5 sm:px-4 py-2 bg-[#F9F4DA] text-black border-2 sm:border-4 border-black shadow-[3px_3px_0px_#000000] hover:bg-[#FF7612] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none disabled:opacity-40 disabled:pointer-events-none uppercase transition-all shrink-0 focus:outline-none"
+          className="cream-surface hover:!bg-[linear-gradient(#FF7612,#FF7612)] text-xs sm:text-base px-2.5 sm:px-4 py-2 border-2 sm:border-4 border-black shadow-[3px_3px_0px_#000000] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none disabled:opacity-40 disabled:pointer-events-none uppercase transition-all shrink-0 focus:outline-none"
           onClick={() => {
             const next = pageNo + 1;
             setPageNo(next);

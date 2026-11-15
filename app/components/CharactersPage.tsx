@@ -31,7 +31,7 @@ const LOOLI_CHARACTER: ICharacter = {
     name: "Earth (Replacement Dimension)",
     url: "https://rickandmortyapi.com/api/location/20",
   },
-  image: "/images/looli.jpg",
+  image: "/Rick-and-Morty-Wiki/images/looli.jpg",
   episode: ["https://rickandmortyapi.com/api/episode/15"],
   url: "https://rickandmortyapi.com/api/character/99999",
   created: "1998-04-04T18:48:46.250Z",
@@ -65,10 +65,10 @@ export const CharactersPage = (props: IProps) => {
             {Array.from({ length: 8 }).map((_, idx) => (
               <div
                 key={idx}
-                className="bg-[#1E293B] border-4 border-[#F9F4DA] shadow-[6px_6px_0px_#F9F4DA] p-3 animate-pulse"
+                className="slate-card-surface border-4 border-[#F9F4DA] shadow-[6px_6px_0px_#F9F4DA] p-3 animate-pulse"
               >
-                <div className="aspect-square w-full bg-[#F9F4DA] border-4 border-black" />
-                <div className="mt-3 h-11 bg-[#F9F4DA] border-4 border-black" />
+                <div className="cream-surface aspect-square w-full border-4 border-black" />
+                <div className="cream-surface mt-3 h-11 border-4 border-black" />
               </div>
             ))}
           </section>
@@ -108,11 +108,11 @@ export const CharactersPage = (props: IProps) => {
         <StarfieldBackground />
         <div className="relative z-10 w-full flex-1 flex flex-col justify-between overflow-x-hidden">
           <div className="w-full max-w-xl mx-auto my-16 px-5">
-            <div className="bg-[#FF2A55] text-white border-4 border-[#F9F4DA] shadow-[6px_6px_0px_#F9F4DA] p-6 text-center">
-              <p className="text-2xl uppercase">
+            <div className="bg-[linear-gradient(#FF2A55,#FF2A55)] bg-[#FF2A55] !text-white border-4 border-[#F9F4DA] shadow-[6px_6px_0px_#F9F4DA] p-6 text-center">
+              <p className="text-2xl uppercase !text-white">
                 ERROR 404 // NO_SUBJECTS_FOUND
               </p>
-              <p className="mt-2 text-sm">
+              <p className="mt-2 text-sm !text-white">
                 No matching lifeforms detected in this dimension.
               </p>
             </div>
