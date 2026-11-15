@@ -7,14 +7,13 @@
 :root,
 html,
 body {
-  color-scheme: only dark !important;
+  color-scheme: light only !important;
   forced-color-adjust: none !important;
   -webkit-forced-color-adjust: none !important;
   color: #F9F4DA;
-  background-color: #0B0F19 !important;
-  background-image: linear-gradient(#0B0F19, #0B0F19) !important;
-  font-family: "Wellfleet", sans-serif;
-  min-height: 100vh;
+  background-color: rgba(11, 15, 25, 1) !important;
+  font-family: "Wellfleet", cursive, sans-serif !important;
+  min-height: 100dvh;
   max-width: 100vw;
   overflow-x: hidden;
   position: relative;
@@ -23,29 +22,50 @@ body {
 *,
 *::before,
 *::after {
+  font-family: "Wellfleet", cursive, sans-serif;
   forced-color-adjust: none !important;
   -webkit-forced-color-adjust: none !important;
 }
 
-/* Bulletproof gradient-backed surfaces: mobile browsers never invert CSS background-image gradients */
+/* Explicit non-transparent rgba backgrounds + backdrop-filter so mobile compositors never invert text nodes */
 .cream-surface {
-  background-color: #F9F4DA !important;
-  background-image: linear-gradient(#F9F4DA, #F9F4DA) !important;
+  background-color: rgba(249, 244, 218, 0.96) !important;
+  background-image: linear-gradient(rgba(249, 244, 218, 0.96), rgba(249, 244, 218, 0.96)) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
 }
 
 .white-surface {
-  background-color: #FFFFFF !important;
-  background-image: linear-gradient(#FFFFFF, #FFFFFF) !important;
+  background-color: rgba(255, 255, 255, 0.94) !important;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.94)) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
 }
 
 .slate-card-surface {
-  background-color: #1E293B !important;
-  background-image: linear-gradient(#1E293B, #1E293B) !important;
+  background-color: rgba(30, 41, 59, 0.96) !important;
+  background-image: linear-gradient(rgba(30, 41, 59, 0.96), rgba(30, 41, 59, 0.96)) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 .slate-bar-surface {
-  background-color: #334155 !important;
-  background-image: linear-gradient(#334155, #334155) !important;
+  background-color: rgba(51, 65, 85, 0.96) !important;
+  background-image: linear-gradient(rgba(51, 65, 85, 0.96), rgba(51, 65, 85, 0.96)) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: #F9F4DA !important;
+  -webkit-text-fill-color: #F9F4DA !important;
+}
+
+.safe-top {
+  padding-top: max(1.5rem, env(safe-area-inset-top));
+}
+
+.safe-bottom {
+  padding-bottom: max(2rem, env(safe-area-inset-bottom));
 }

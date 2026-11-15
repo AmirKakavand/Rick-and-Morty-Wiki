@@ -22,6 +22,12 @@ const PageNavigation = ({
   };
 
   const commitPageChange = () => {
+    // If tempPageNo wasn't edited or already matches pageNo, do nothing
+    if (tempPageNo === "" || Number(tempPageNo) === pageNo) {
+      setTempPageNo(pageNo);
+      return;
+    }
+
     const parsed = Number(tempPageNo);
     let targetPage = parsed;
 
@@ -42,12 +48,15 @@ const PageNavigation = ({
     <div className="w-full max-w-lg mx-auto px-5 sm:px-4 mt-8 mb-6">
       <nav className="slate-card-surface w-full flex items-center justify-between gap-2 py-3 px-3 sm:px-6 !text-[#F9F4DA] border-4 border-[#F9F4DA] shadow-[6px_6px_0px_#F9F4DA]">
         <button
+          type="button"
           disabled={pageNo <= 1}
           className="cream-surface hover:!bg-[linear-gradient(#FFFFFF,#FFFFFF)] text-xs sm:text-base px-2.5 sm:px-4 py-2 border-2 sm:border-4 border-black shadow-[3px_3px_0px_#000000] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none disabled:opacity-40 disabled:pointer-events-none uppercase transition-all shrink-0 focus:outline-none"
           onClick={() => {
-            const prev = pageNo - 1;
-            setPageNo(prev);
-            setTempPageNo(prev);
+            setPageNo((prevPage) => {
+              const nextVal = Math.max(1, prevPage - 1);
+              setTempPageNo(nextVal);
+              return nextVal;
+            });
             scrollToTop();
           }}
         >
@@ -78,12 +87,15 @@ const PageNavigation = ({
         </div>
 
         <button
+          type="button"
           disabled={pageNo >= lastPageNo}
           className="cream-surface hover:!bg-[linear-gradient(#FF7612,#FF7612)] text-xs sm:text-base px-2.5 sm:px-4 py-2 border-2 sm:border-4 border-black shadow-[3px_3px_0px_#000000] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none disabled:opacity-40 disabled:pointer-events-none uppercase transition-all shrink-0 focus:outline-none"
           onClick={() => {
-            const next = pageNo + 1;
-            setPageNo(next);
-            setTempPageNo(next);
+            setPageNo((prevPage) => {
+              const nextVal = Math.min(lastPageNo || 42, prevPage + 1);
+              setTempPageNo(nextVal);
+              return nextVal;
+            });
             scrollToTop();
           }}
         >

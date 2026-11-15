@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { CharactersPage } from "./components/CharactersPage";
 import { handleSearch } from "./utils/handleSearch";
 import Header from "./components/Header";
@@ -9,8 +9,16 @@ export default function Home() {
   const [name, setName] = useState<string>("");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [tempPageNo, setTempPageNo] = useState<number | string>(1);
+  const isFirstRender = useRef<boolean>(true);
 
   useEffect(() => {
+    // Do not run handleSearch on initial mount when name is empty,
+    // otherwise its debounce timer resets pageNo back to 1 when the user clicks "Next"!
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
     setTempPageNo(1);
     return handleSearch({ name, setSearchQuery, setPageNo });
   }, [name]);
@@ -38,7 +46,7 @@ export default function Home() {
 }
 
 const mainClass = [
-  "min-h-screen",
+  "min-h-[100dvh]",
   "w-full",
   "overflow-x-hidden",
   "flex",
